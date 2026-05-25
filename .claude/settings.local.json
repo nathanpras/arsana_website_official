@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm cache *)",
+      "Bash(sudo chown -R 501:20 \"/Users/jonathanprasetyo/.npm\")",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(npm uninstall *)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(pkill -f \"next-server\")",
+      "Read(//tmp/**)",
+      "Bash(pkill -f \"next\")",
+      "Bash(xargs kill -9)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:3000)"
+    ]
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true
+  }
+}

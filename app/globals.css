@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Arsana warm light palette */
+    --background: 38 28% 95%;          /* warm cream:       #F5EEE5 */
+    --foreground: 22 28% 13%;          /* rich warm brown:  #271810 */
+    --card: 36 22% 92%;                /* warm off-white:   #EDE6DA */
+    --card-foreground: 22 28% 13%;
+    --primary: 38 75% 36%;             /* Arsana gold:      #A37510 */
+    --primary-foreground: 40 30% 97%;  /* near-white on gold */
+    --secondary: 36 18% 90%;           /* warm light gray:  #E9E3D8 */
+    --secondary-foreground: 22 22% 22%;
+    --muted: 36 18% 92%;               /* very light warm   */
+    --muted-foreground: 25 18% 40%;    /* warm reddish gray: #6E5245 */
+    --border: 35 16% 84%;              /* warm light border:#D8CFBF */
+    --radius: 0.5rem;
+  }
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.loader {
+  border: 3px solid hsl(var(--border));
+  border-top-color: hsl(var(--primary));
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
