@@ -1,3 +1,5 @@
 node_modules
 .next
 .DS_Store
+*upscayl*
+public/projects/**/upscayl_png_high-fidelity-4x_5x/
