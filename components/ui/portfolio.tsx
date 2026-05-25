@@ -6,68 +6,68 @@ import { MapPin, Clock, Layers, ArrowUpRight } from 'lucide-react'
 const projects = [
   {
     number: '01',
-    title: 'Renovasi Rumah 2 Lantai',
-    category: 'Renovasi Total',
-    location: 'Jakarta Selatan',
-    duration: '10 minggu',
-    scope: 'Fasad, struktur, plafon gypsum, lantai granit, lighting, finishing',
-    year: '2024',
-    bg: 'from-amber-950 via-stone-900 to-stone-950',
+    title: 'Renovasi Rumah Tinggal',
+    category: 'Renovasi',
+    location: 'Ciledug, Tangerang',
+    duration: '8 minggu',
+    scope: 'Renovasi eksterior, interior, lantai, plafon, dan finishing',
+    year: '2019',
+    image: '/projects/renovasi-green-permata-ciledug/project-19-73.jpeg',
     accent: '#E8A870',
     size: 'lg:col-span-2',
-    tags: ['Renovasi', 'Fasad', 'Interior'],
+    tags: ['Renovasi', 'Eksterior', 'Interior'],
   },
   {
     number: '02',
-    title: 'Bangun Rumah Tinggal',
+    title: 'Rumah Tinggal Taman Surya',
     category: 'Bangun Baru',
-    location: 'Jakarta Timur',
-    duration: '6 bulan',
-    scope: 'Struktur, arsitektur, MEP, finishing interior dan eksterior',
-    year: '2024',
-    bg: 'from-stone-800 via-stone-900 to-stone-950',
+    location: 'Cengkareng, Jakarta',
+    duration: '5 bulan',
+    scope: 'Pembangunan rumah tinggal dari pondasi hingga finishing',
+    year: '2019',
+    image: '/projects/rumah-tinggal-taman-surya-cengkareng-2019/project-15-42.jpeg',
     accent: '#C4A882',
     size: '',
-    tags: ['Bangun Baru', 'Struktur', 'MEP'],
+    tags: ['Bangun Baru', 'Struktur', 'Finishing'],
   },
   {
     number: '03',
-    title: 'Fit-Out Kantor Startup',
-    category: 'Interior Komersial',
-    location: 'Jakarta Pusat',
-    duration: '5 minggu',
-    scope: 'Partisi, plafon, flooring, custom furniture, pencahayaan',
-    year: '2024',
-    bg: 'from-amber-950 via-amber-950 to-stone-950',
+    title: 'Rumah Tinggal Suvarna Sutra',
+    category: 'Bangun Baru',
+    location: 'Cikupa, Tangerang',
+    duration: '9 bulan',
+    scope: 'Struktur, arsitektur, MEP, finishing interior dan eksterior',
+    year: '2021',
+    image: '/projects/rumah-tinggal-suvarna-sutra-padi-utama-2020-2021/project-20-86.jpeg',
     accent: '#D4956A',
     size: '',
-    tags: ['Interior', 'Kantor', 'Fit-Out'],
+    tags: ['Bangun Baru', 'MEP', 'Finishing'],
   },
   {
     number: '04',
-    title: 'Renovasi Dapur & 2 Kamar',
-    category: 'Renovasi Parsial',
-    location: 'Tangerang Selatan',
-    duration: '3 minggu',
-    scope: 'Kitchen set custom, kamar mandi, lantai, pengecatan ulang',
-    year: '2023',
-    bg: 'from-stone-700 via-stone-800 to-stone-950',
+    title: 'Rumah Tinggal Nava Park',
+    category: 'Bangun Baru',
+    location: 'BSD, Tangerang',
+    duration: '7 bulan',
+    scope: 'Pembangunan rumah tinggal lengkap dengan landscaping',
+    year: '2022',
+    image: '/projects/rumah-tinggal-nava-park-bsd-2021-2022/project-21-94.jpeg',
     accent: '#B8A090',
     size: '',
-    tags: ['Renovasi', 'Dapur', 'Kamar'],
+    tags: ['Bangun Baru', 'Landscape', 'Finishing'],
   },
   {
     number: '05',
-    title: 'Renovasi Ruko 3 Lantai',
-    category: 'Bangunan Komersial',
-    location: 'Jakarta Barat',
-    duration: '8 minggu',
-    scope: 'Fasad, tata ruang, MEP, finishing, signage area',
-    year: '2023',
-    bg: 'from-amber-900 via-stone-900 to-stone-950',
+    title: 'Rumah Tinggal Suvarna Sutra Daru',
+    category: 'Bangun Baru',
+    location: 'Cikupa, Tangerang',
+    duration: '9 bulan',
+    scope: 'Pembangunan dari nol termasuk struktur, MEP, dan finishing total',
+    year: '2022',
+    image: '/projects/rumah-tinggal-suvarna-sutra-daru1-2021-2022/project-23-106.jpeg',
     accent: '#E8B870',
     size: 'lg:col-span-2',
-    tags: ['Komersial', 'Ruko', 'Fasad'],
+    tags: ['Bangun Baru', 'Struktur', 'MEP'],
   },
 ]
 
@@ -113,15 +113,11 @@ export function Portfolio() {
               viewport={{ once: true }}
               className={`group relative rounded-2xl overflow-hidden border border-border aspect-[4/3] cursor-pointer ${project.size}`}
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${project.bg} transition-transform duration-700 group-hover:scale-105`} />
-
-              {/* Texture */}
-              <div className="absolute inset-0 opacity-[0.035]"
-                style={{
-                  backgroundImage: 'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)',
-                  backgroundSize: '28px 28px',
-                }}
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                style={{ backgroundImage: `url(${project.image})` }}
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/10" />
 
               {/* Large number */}
               <div className="absolute top-4 right-5 font-serif text-7xl font-bold text-white/[0.06] select-none leading-none">

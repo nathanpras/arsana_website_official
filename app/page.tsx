@@ -31,10 +31,8 @@ export default function Home() {
           <a href="#kontak" className="hover:text-foreground transition-colors">Kontak</a>
         </div>
         <a
-          href="https://wa.me/6281234567890?text=Halo%20Arsana%2C%20saya%20ingin%20konsultasi%20proyek.%20Boleh%20dibantu%20estimasi%20awal?"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-4 py-2 bg-primary text-primary-foreground text-sm font-semibold rounded-lg hover:bg-primary/90 transition-colors"
+          href="#kontak"
+          className="px-4 py-2 border border-foreground/20 text-foreground text-sm font-semibold rounded-lg hover:bg-foreground/5 transition-colors"
         >
           Konsultasi via WA
         </a>

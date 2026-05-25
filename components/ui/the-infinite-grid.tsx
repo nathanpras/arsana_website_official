@@ -163,9 +163,7 @@ export const Component = () => {
                 <h3 className="font-bold text-foreground mb-2">{service.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed flex-1 mb-5">{service.description}</p>
                 <a
-                  href={`https://wa.me/6281234567890?text=Halo%20Arsana%2C%20saya%20ingin%20tanya%20tentang%20layanan%20${encodeURIComponent(service.title)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#kontak"
                   className="text-sm font-medium text-primary hover:underline underline-offset-4 transition-all"
                 >
                   {service.cta} →

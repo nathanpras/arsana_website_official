@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { MessageCircle, CalendarCheck, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 export function FinalCTA() {
   return (
@@ -63,26 +63,15 @@ export function FinalCTA() {
             className="flex items-center justify-center gap-4 flex-wrap"
           >
             <motion.a
-              href="https://wa.me/6281234567890?text=Halo%20Arsana%2C%20saya%20ingin%20konsultasi%20proyek"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#kontak"
               className="group inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-semibold text-sm text-stone-950 transition-all duration-300 cursor-pointer"
               style={{ background: 'linear-gradient(105deg, #E8A870, #C46830)' }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <MessageCircle className="w-4 h-4" />
-              Konsultasi via WhatsApp
+              Mulai Proyek
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </motion.a>
-            <motion.button
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-stone-700 text-stone-300 font-medium text-sm hover:border-amber-700 hover:text-amber-400 transition-all duration-300 cursor-pointer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <CalendarCheck className="w-4 h-4" />
-              Jadwalkan Survey Lokasi
-            </motion.button>
           </motion.div>
 
           <p className="text-stone-600 text-xs mt-8">

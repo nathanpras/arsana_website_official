@@ -108,12 +108,10 @@ export function ProcessSteps() {
         >
           <p className="text-muted-foreground text-sm mb-4">Mau mulai dari konsultasi dulu?</p>
           <a
-            href="https://wa.me/6281234567890?text=Halo%20Arsana%2C%20saya%20ingin%20konsultasi%20proyek.%20Boleh%20kirim%20lokasi%20dan%20foto%20kondisi%20saat%20ini?"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#kontak"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border text-foreground text-sm font-medium hover:border-primary/60 hover:bg-primary/5 transition-all duration-300"
           >
-            Kirim Lokasi & Foto Kondisi Proyek
+            Mulai dari Konsultasi
           </a>
         </motion.div>
         </div>

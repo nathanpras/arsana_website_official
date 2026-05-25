@@ -230,13 +230,14 @@ export function SplineSceneBasic() {
             animate="visible"
             className="flex items-center justify-center gap-4 flex-wrap"
           >
-            <motion.button
+            <motion.a
+              href="#kontak"
               className="px-8 py-3.5 rounded-full font-semibold text-sm cursor-pointer transition-all duration-300 bg-foreground text-background hover:bg-foreground/90"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Konsultasi Gratis via WhatsApp
-            </motion.button>
+              Konsultasi Gratis
+            </motion.a>
             <motion.button
               className="px-8 py-3.5 rounded-full border border-border text-muted-foreground font-medium text-sm hover:bg-secondary hover:text-foreground transition-all duration-300 cursor-pointer"
               whileHover={{ scale: 1.05 }}
