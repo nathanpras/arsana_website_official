@@ -69,6 +69,71 @@ const projects = [
     size: 'lg:col-span-2',
     tags: ['Bangun Baru', 'Struktur', 'MEP'],
   },
+  {
+    number: '06',
+    title: 'Renovasi Cafe Coffee Grounds',
+    category: 'Renovasi Komersial',
+    location: 'Sunter, Jakarta Utara',
+    duration: '3 bulan',
+    scope: 'Renovasi fasad, interior, dan fit-out cafe tiga lantai',
+    year: '2018',
+    image: '/projects/renovasi-cafe-coffee-grounds-sunter/project-13-25.jpeg',
+    accent: '#C47030',
+    size: '',
+    tags: ['Renovasi', 'Komersial', 'Fit-Out'],
+  },
+  {
+    number: '07',
+    title: 'Rumah Tinggal Bintaro',
+    category: 'Bangun Baru',
+    location: 'Bintaro, Tangerang',
+    duration: '6 bulan',
+    scope: 'Pembangunan rumah tinggal dua lantai bergaya klasik modern',
+    year: '2020',
+    image: '/projects/rumah-tinggal-bintaro-2019-2020/project-17-58.jpeg',
+    accent: '#D0A878',
+    size: '',
+    tags: ['Bangun Baru', 'Klasik', 'Finishing'],
+  },
+  {
+    number: '08',
+    title: 'Rumah Tinggal Bangka Mampang',
+    category: 'Bangun Baru',
+    location: 'Mampang, Jakarta Selatan',
+    duration: '10 bulan',
+    scope: 'Pembangunan rumah tinggal bergaya klasik Eropa dari nol',
+    year: '2024',
+    image: '/projects/rumah-tinggal-bangka-mampang-2024/project-38-240.jpeg',
+    accent: '#C8A875',
+    size: '',
+    tags: ['Bangun Baru', 'Klasik', 'Interior'],
+  },
+  {
+    number: '09',
+    title: 'Showroom Marmer Cipondoh',
+    category: 'Renovasi Komersial',
+    location: 'Cipondoh, Tangerang',
+    duration: '2 bulan',
+    scope: 'Renovasi fasad dan interior showroom material bangunan',
+    year: '2023',
+    image: '/projects/renovasi-ruko-showroom-marmer-cipondoh-2023/project-35-214.jpeg',
+    accent: '#B0A090',
+    size: '',
+    tags: ['Renovasi', 'Komersial', 'Fasad'],
+  },
+  {
+    number: '10',
+    title: 'Rumah Tinggal Taman Alfa',
+    category: 'Bangun Baru',
+    location: 'Joglo, Jakarta Barat',
+    duration: '8 bulan',
+    scope: 'Pembangunan rumah tinggal dua lantai dengan carport dan taman',
+    year: '2022',
+    image: '/projects/rumah-tinggal-taman-alfa-joglo-2022/project-26-129.jpeg',
+    accent: '#A09888',
+    size: '',
+    tags: ['Bangun Baru', 'Landscape', 'Finishing'],
+  },
 ]
 
 export function Portfolio() {
@@ -103,7 +168,7 @@ export function Portfolio() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 grid-flow-row-dense">
           {projects.map((project, i) => (
             <motion.div
               key={i}
