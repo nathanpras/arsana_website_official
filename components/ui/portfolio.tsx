@@ -14,7 +14,7 @@ const projects = [
     year: '2019',
     image: '/projects/renovasi-green-permata-ciledug/project-19-73.jpeg',
     accent: '#E8A870',
-    size: 'lg:col-span-2',
+    size: '',
     tags: ['Renovasi', 'Eksterior', 'Interior'],
   },
   {
@@ -38,9 +38,9 @@ const projects = [
     duration: '9 bulan',
     scope: 'Struktur, arsitektur, MEP, finishing interior dan eksterior',
     year: '2021',
-    image: '/projects/rumah-tinggal-suvarna-sutra-padi-utama-2020-2021/project-20-86.jpeg',
+    image: '/projects/rumah-tinggal-suvarna-sutra-padi-utama-2020-2021/project-20-86-sharp.jpeg',
     accent: '#D4956A',
-    size: '',
+    size: 'lg:col-span-2',
     tags: ['Bangun Baru', 'MEP', 'Finishing'],
   },
   {
@@ -53,7 +53,7 @@ const projects = [
     year: '2022',
     image: '/projects/rumah-tinggal-nava-park-bsd-2021-2022/project-21-91-sharp.jpeg',
     accent: '#B8A090',
-    size: '',
+    size: 'lg:col-span-2',
     tags: ['Bangun Baru', 'Landscape', 'Finishing'],
   },
   {
@@ -64,7 +64,7 @@ const projects = [
     duration: '9 bulan',
     scope: 'Pembangunan dari nol termasuk struktur, MEP, dan finishing total',
     year: '2022',
-    image: '/projects/rumah-tinggal-suvarna-sutra-daru1-2021-2022/project-23-106.jpeg',
+    image: '/projects/rumah-tinggal-suvarna-sutra-daru1-2021-2022/project-23-106-sharp.jpeg',
     accent: '#E8B870',
     size: 'lg:col-span-2',
     tags: ['Bangun Baru', 'Struktur', 'MEP'],
@@ -157,7 +157,7 @@ const projects = [
     year: '2023',
     image: '/projects/rumah-tinggal-chiara7-cikupa-tangerang-2023/project-30-168-sharp.jpeg',
     accent: '#C09878',
-    size: 'lg:col-span-2',
+    size: '',
     tags: ['Bangun Baru', 'Modern', 'Finishing'],
   },
 ]
