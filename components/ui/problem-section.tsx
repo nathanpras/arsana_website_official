@@ -65,7 +65,7 @@ const iconAnimations = [
 
 export function ProblemSection() {
   return (
-    <section className="bg-background py-20 overflow-hidden">
+    <section className="bg-[hsl(var(--panel))] py-20 overflow-hidden">
       <div className="container mx-auto px-6">
 
         <motion.div
@@ -105,13 +105,14 @@ export function ProblemSection() {
                   ease: [0.16, 1, 0.3, 1],
                 }}
                 viewport={{ once: true, amount: 0.2 }}
-                className={`group relative rounded-2xl border border-border bg-gradient-to-br ${p.bg} p-5 hover:border-border/80 hover:shadow-sm transition-all duration-300 overflow-hidden`}
+                className="group relative rounded-2xl border border-border bg-card card-soft p-5 hover:border-border/80 hover:-translate-y-0.5 transition-all duration-300 overflow-hidden"
               >
-                {/* Animated glow blob */}
+                {/* Glow blob — denyut HANYA via opacity (di-composite di GPU),
+                    tanpa scale, jadi blur tidak perlu di-render ulang = tetap hemat. */}
                 <motion.div
-                  className="absolute -top-6 -right-6 w-20 h-20 rounded-full blur-2xl opacity-30"
-                  style={{ background: p.color }}
-                  animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.35, 0.2] }}
+                  className="absolute -top-6 -right-6 w-20 h-20 rounded-full blur-2xl pointer-events-none"
+                  style={{ background: p.color, willChange: 'opacity' }}
+                  animate={{ opacity: [0.2, 0.38, 0.2] }}
                   transition={{ duration: 4 + i * 0.4, repeat: Infinity, ease: 'easeInOut' }}
                 />
 

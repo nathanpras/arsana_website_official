@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Send, MapPin, MessageCircle, Phone } from 'lucide-react'
 import { GridBackground } from '@/components/ui/grid-background'
+import { waLink } from '@/lib/contact'
 
 const projectTypes = [
   'Bangun Rumah Baru',
@@ -30,9 +31,10 @@ export function ContactForm() {
   }
 
   const buildWAMessage = () => {
-    const lines = [
+    return [
       'Halo Arsana, saya ingin konsultasi proyek.',
       `Nama: ${form.name}`,
+      form.phone ? `No. HP: ${form.phone}` : '',
       `Lokasi proyek: ${form.location}`,
       `Jenis pekerjaan: ${form.projectType}`,
       form.area ? `Perkiraan luas: ${form.area} m²` : '',
@@ -41,12 +43,11 @@ export function ContactForm() {
     ]
       .filter(Boolean)
       .join('\n')
-    return encodeURIComponent(lines)
   }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    window.open(`https://wa.me/6281234567890?text=${buildWAMessage()}`, '_blank')
+    window.open(waLink(buildWAMessage()), '_blank')
   }
 
   return (
@@ -129,7 +130,7 @@ export function ContactForm() {
             >
               <form
                 onSubmit={handleSubmit}
-                className="rounded-2xl border border-border bg-card p-8 space-y-5"
+                className="rounded-2xl border border-border bg-card card-soft p-8 space-y-5"
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
@@ -224,15 +225,19 @@ export function ContactForm() {
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  className="group w-full flex items-center justify-center gap-2.5 py-4 rounded-xl font-semibold text-sm transition-all duration-300 text-stone-950"
-                  style={{ background: 'linear-gradient(105deg, #E8A870, #C46830)' }}
-                >
-                  <Send className="w-4 h-4" />
-                  Kirim ke WhatsApp
-                  <span className="ml-1 text-stone-800/60 text-xs font-normal">· Gratis, tidak ada komitmen</span>
-                </button>
+                <div>
+                  <button
+                    type="submit"
+                    className="group w-full flex items-center justify-center gap-2.5 py-4 px-4 rounded-xl font-semibold text-sm transition-all duration-300 text-stone-950 hover:brightness-105 active:scale-[0.98]"
+                    style={{ background: 'linear-gradient(105deg, #E8A870, #C46830)' }}
+                  >
+                    <Send className="w-4 h-4 shrink-0" />
+                    <span className="whitespace-nowrap">Kirim ke WhatsApp</span>
+                  </button>
+                  <p className="text-center text-xs text-muted-foreground mt-3">
+                    Gratis, tidak ada komitmen
+                  </p>
+                </div>
               </form>
             </motion.div>
           </div>

@@ -4,7 +4,6 @@ import { TrustSection } from '@/components/ui/trust-section'
 import { Component as InfiniteGrid } from '@/components/ui/the-infinite-grid'
 import { Portfolio } from '@/components/ui/portfolio'
 import { ProcessSteps } from '@/components/ui/process-steps'
-import { Testimonials } from '@/components/ui/testimonials'
 import { FAQ } from '@/components/ui/faq'
 import { FinalCTA } from '@/components/ui/final-cta'
 import { ContactForm } from '@/components/ui/contact-form'
@@ -15,7 +14,7 @@ export default function Home() {
   return (
     <main className="bg-background min-h-screen">
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 bg-background/80 backdrop-blur-sm border-b border-border">
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-8 py-4 bg-background/80 backdrop-blur-sm border-b border-border">
         <div className="flex flex-col leading-none">
           <span
             className="font-serif text-base font-bold tracking-widest uppercase bg-clip-text text-transparent"
@@ -66,11 +65,6 @@ export default function Home() {
       {/* 6. Proses Kerja */}
       <section id="process" className="border-t border-border">
         <ProcessSteps />
-      </section>
-
-      {/* 7. Testimoni */}
-      <section id="testimoni" className="border-t border-border">
-        <Testimonials />
       </section>
 
       {/* 8. FAQ */}

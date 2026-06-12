@@ -6,9 +6,9 @@ import {
   motion,
   useMotionValue,
   useMotionTemplate,
-  useAnimationFrame,
 } from 'framer-motion'
 import { Home, Wrench, Sofa, Building2, Zap, Wind, Armchair } from 'lucide-react'
+import { AnimatedGrid } from '@/components/ui/animated-grid'
 
 const primaryServices = [
   {
@@ -71,14 +71,6 @@ export const Component = () => {
     mouseY.set(e.clientY - top)
   }
 
-  const gridOffsetX = useMotionValue(0)
-  const gridOffsetY = useMotionValue(0)
-
-  useAnimationFrame(() => {
-    gridOffsetX.set((gridOffsetX.get() + 0.5) % 40)
-    gridOffsetY.set((gridOffsetY.get() + 0.5) % 40)
-  })
-
   const maskImage = useMotionTemplate`radial-gradient(300px circle at ${mouseX}px ${mouseY}px, black, transparent)`
 
   const containerVariants = {
@@ -97,19 +89,18 @@ export const Component = () => {
       onMouseMove={handleMouseMove}
       className={cn('relative w-full bg-background overflow-hidden py-24')}
     >
-      <div className="absolute inset-0 z-0 opacity-[0.05]">
-        <GridPattern offsetX={gridOffsetX} offsetY={gridOffsetY} />
+      <div className="absolute inset-0 z-0 opacity-[0.05] overflow-hidden">
+        <AnimatedGrid />
       </div>
       <motion.div
-        className="absolute inset-0 z-0 opacity-40"
+        className="absolute inset-0 z-0 opacity-40 overflow-hidden hidden [@media(hover:hover)]:block"
         style={{ maskImage, WebkitMaskImage: maskImage }}
       >
-        <GridPattern offsetX={gridOffsetX} offsetY={gridOffsetY} />
+        <AnimatedGrid />
       </motion.div>
 
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute right-[-15%] top-[-25%] w-[55%] h-[55%] rounded-full bg-orange-200/75 blur-[160px]" />
-        <div className="absolute right-[5%] top-[-5%] w-[25%] h-[25%] rounded-full bg-amber-100/60 blur-[100px]" />
+        <div className="absolute right-[-15%] top-[-25%] w-[55%] h-[55%] rounded-full bg-orange-200/75 blur-[120px]" />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
@@ -151,7 +142,7 @@ export const Component = () => {
               <motion.div
                 key={i}
                 variants={cardVariants}
-                className={`group flex flex-col p-6 rounded-2xl border bg-card transition-all duration-300 ${
+                className={`group flex flex-col p-6 rounded-2xl border bg-card card-soft transition-all duration-300 hover:-translate-y-0.5 ${
                   service.highlight
                     ? 'border-primary/40 ring-1 ring-primary/15 hover:border-primary/60'
                     : 'border-border hover:border-primary/30'
@@ -187,7 +178,7 @@ export const Component = () => {
               <motion.div
                 key={i}
                 variants={cardVariants}
-                className="group flex items-start gap-4 p-5 rounded-xl border border-border bg-card/60 hover:border-border/80 hover:bg-card transition-all duration-300"
+                className="group flex items-start gap-4 p-5 rounded-xl border border-border bg-card card-soft hover:border-border/80 transition-all duration-300"
               >
                 <div className="shrink-0 w-9 h-9 rounded-lg bg-primary/8 flex items-center justify-center">
                   <Icon className="w-4 h-4 text-primary/80" />
@@ -205,29 +196,3 @@ export const Component = () => {
   )
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const GridPattern = ({ offsetX, offsetY }: { offsetX: any; offsetY: any }) => {
-  return (
-    <svg className="w-full h-full">
-      <defs>
-        <motion.pattern
-          id="grid-pattern"
-          width="40"
-          height="40"
-          patternUnits="userSpaceOnUse"
-          x={offsetX}
-          y={offsetY}
-        >
-          <path
-            d="M 40 0 L 0 0 0 40"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1"
-            className="text-muted-foreground"
-          />
-        </motion.pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#grid-pattern)" />
-    </svg>
-  )
-}

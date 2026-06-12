@@ -77,10 +77,11 @@ export function SplineSceneBasic() {
       />
       {/* Warm fade overlay to blend image with background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background/80 via-background/40 to-orange-50/60 pointer-events-none" />
-      <div className="absolute right-[-15%] top-[-25%] w-[55%] h-[55%] rounded-full bg-orange-200/75 blur-[160px] pointer-events-none" />
-      <div className="absolute right-[5%] top-[-5%] w-[25%] h-[25%] rounded-full bg-amber-100/60 blur-[100px] pointer-events-none" />
+      <div className="absolute right-[-15%] top-[-25%] w-[55%] h-[55%] rounded-full bg-orange-200/75 blur-[120px] pointer-events-none" />
 
-      <div className="absolute inset-0 overflow-hidden">
+      {/* Bentuk dekoratif melayang — disembunyikan di mobile agar tidak meleset
+          keluar layar dan tidak membebani GPU perangkat kecil. */}
+      <div className="absolute inset-0 overflow-hidden hidden md:block">
         <ElegantShape
           delay={0.3}
           width={600}

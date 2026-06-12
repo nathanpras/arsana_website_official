@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Home, Wrench, Sofa, Building2, ArrowRight, Info } from 'lucide-react'
+import { WHATSAPP_NUMBER } from '@/lib/contact'
 
 const estimates = [
   {
@@ -143,7 +144,7 @@ export function EstimasiBiaya() {
                 </ul>
 
                 <a
-                  href={`https://wa.me/6281234567890?text=${item.waMessage}`}
+                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=${item.waMessage}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group/btn inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-semibold border border-border hover:border-primary/40 hover:bg-primary/5 transition-all duration-300 text-foreground"

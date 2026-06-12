@@ -85,7 +85,7 @@ export const Footer7 = ({
   legalLinks = defaultLegalLinks,
 }: Footer7Props) => {
   return (
-    <section className="py-24 bg-background border-t border-border">
+    <section className="py-24 bg-[hsl(var(--panel-deep))] border-t border-border">
       <div className="container mx-auto px-6">
         <div className="flex w-full flex-col justify-between gap-10 lg:flex-row lg:items-start lg:text-left">
           <div className="flex w-full flex-col justify-between gap-6 lg:items-start">

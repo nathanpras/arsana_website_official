@@ -53,7 +53,7 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <GridBackground patternId="faq">
+    <GridBackground patternId="faq" tone="panel">
     <div className="py-24">
       <div className="container mx-auto px-6 max-w-3xl">
         <motion.div

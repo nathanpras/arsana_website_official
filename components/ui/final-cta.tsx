@@ -9,22 +9,31 @@ export function FinalCTA() {
       className="relative overflow-hidden py-32"
       style={{ background: 'linear-gradient(135deg, #1C1008 0%, #3D1F0A 50%, #1C1008 100%)' }}
     >
-      {/* Warm glow */}
+      {/* Aurora bercahaya yang mengalir pelan (GPU, hemat) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute left-[20%] top-[-20%] w-[60%] h-[60%] rounded-full opacity-20 blur-[120px]"
-          style={{ background: 'radial-gradient(circle, #C46830, transparent)' }} />
-        <div className="absolute right-[10%] bottom-[-10%] w-[40%] h-[40%] rounded-full opacity-15 blur-[100px]"
-          style={{ background: 'radial-gradient(circle, #E8A870, transparent)' }} />
+        <div
+          className="cta-aurora cta-aurora-1"
+          style={{ background: 'radial-gradient(circle, rgba(196,104,48,0.55), transparent 62%)' }}
+        />
+        <div
+          className="cta-aurora cta-aurora-2"
+          style={{ background: 'radial-gradient(circle, rgba(232,168,112,0.40), transparent 62%)' }}
+        />
+        <div
+          className="cta-aurora cta-aurora-3"
+          style={{ background: 'radial-gradient(circle, rgba(160,72,40,0.45), transparent 62%)' }}
+        />
       </div>
 
-      {/* Subtle grid texture */}
+      {/* Vignette agar teks tetap kontras & fokus ke tengah */}
       <div
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
-        style={{
-          backgroundImage: 'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)',
-          backgroundSize: '48px 48px',
-        }}
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at center, transparent 35%, rgba(15,8,4,0.65) 100%)' }}
       />
+
+      {/* Garis tipis aksen di atas & bawah */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
 
       <div className="relative z-10 container mx-auto px-6 text-center">
         <motion.div

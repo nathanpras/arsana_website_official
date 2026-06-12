@@ -2,12 +2,11 @@
 
 import { motion } from 'framer-motion'
 import { FaWhatsapp } from 'react-icons/fa'
+import { waLink } from '@/lib/contact'
 
-const PHONE = '6281234567890' // ganti dengan nomor WhatsApp Arsana
-const MESSAGE = encodeURIComponent(
+const WA_URL = waLink(
   'Halo Arsana! Saya tertarik dengan layanan desain dan konstruksi Anda. Bisakah saya mendapatkan informasi lebih lanjut dan konsultasi gratis?'
 )
-const WA_URL = `https://wa.me/${PHONE}?text=${MESSAGE}`
 
 export function WhatsAppButton() {
   return (

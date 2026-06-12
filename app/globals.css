@@ -7,8 +7,10 @@
     /* Arsana warm light palette */
     --background: 38 28% 95%;          /* warm cream:       #F5EEE5 */
     --foreground: 22 28% 13%;          /* rich warm brown:  #271810 */
-    --card: 36 22% 92%;                /* warm off-white:   #EDE6DA */
+    --card: 40 48% 98%;                /* near-white warm — kotak menonjol di atas cream */
     --card-foreground: 22 28% 13%;
+    --panel: 36 30% 93%;               /* sand hangat lembut — bg section selang-seling */
+    --panel-deep: 35 28% 90.5%;        /* sand sedikit lebih dalam — footer */
     --primary: 38 75% 36%;             /* Arsana gold:      #A37510 */
     --primary-foreground: 40 30% 97%;  /* near-white on gold */
     --secondary: 36 18% 90%;           /* warm light gray:  #E9E3D8 */
@@ -24,8 +26,32 @@
   border-color: hsl(var(--border));
 }
 
+@layer components {
+  /* Bayangan lembut hangat agar kotak terasa "terangkat" dari background */
+  .card-soft {
+    box-shadow:
+      0 1px 2px rgba(60, 40, 20, 0.04),
+      0 6px 20px rgba(60, 40, 20, 0.05);
+  }
+}
+
 html {
   scroll-behavior: smooth;
+  /* Beri ruang agar judul section tidak tertutup navbar fixed saat klik menu */
+  scroll-padding-top: 5rem;
+}
+
+/* Hormati preferensi pengguna yang mematikan animasi (juga mengurangi panas
+   & jank di perangkat lemah). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 body {
@@ -48,4 +74,69 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Grid latar yang bergeser pelan — dianimasikan via transform (compositor/GPU),
+   bukan dengan menggambar ulang SVG tiap frame. Halus & nyaris tanpa beban. */
+.grid-drift {
+  position: absolute;
+  inset: -40px; /* sedikit lebih besar dari area agar tidak ada celah saat bergeser */
+  background-image:
+    linear-gradient(to right, hsl(var(--muted-foreground)) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--muted-foreground)) 1px, transparent 1px);
+  background-size: 40px 40px;
+  will-change: transform;
+  transform: translateZ(0);
+  animation: grid-drift 7s linear infinite;
+}
+
+/* Dijeda otomatis saat keluar dari layar (hemat baterai). */
+.grid-drift--paused {
+  animation-play-state: paused;
+}
+
+@keyframes grid-drift {
+  to {
+    /* tepat satu petak (40px) → looping mulus tanpa lompatan */
+    transform: translate3d(40px, 40px, 0);
+  }
+}
+
+/* Aurora bercahaya untuk section CTA — bercak warna lembut yang mengalir.
+   Murni transform (GPU), tanpa filter blur, jadi mulus & tidak bikin panas. */
+.cta-aurora {
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  border-radius: 9999px;
+  mix-blend-mode: screen;
+  will-change: transform;
+  transform: translateZ(0);
+}
+.cta-aurora-1 {
+  left: 5%;
+  top: -15%;
+  animation: aurora-1 18s ease-in-out infinite;
+}
+.cta-aurora-2 {
+  right: -5%;
+  bottom: -20%;
+  animation: aurora-2 24s ease-in-out infinite;
+}
+.cta-aurora-3 {
+  left: 35%;
+  bottom: -10%;
+  animation: aurora-3 30s ease-in-out infinite;
+}
+@keyframes aurora-1 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(10%, 8%, 0) scale(1.18); }
+}
+@keyframes aurora-2 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.1); }
+  50% { transform: translate3d(-12%, -8%, 0) scale(0.95); }
+}
+@keyframes aurora-3 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(0.95); }
+  50% { transform: translate3d(8%, -10%, 0) scale(1.2); }
 }
