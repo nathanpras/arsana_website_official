@@ -7,7 +7,7 @@ import { useState } from 'react'
  * Jika file hilang/gagal dimuat, otomatis fallback ke wordmark teks.
  * Ganti logo cukup dengan menimpa file di `public/logo.png`.
  */
-const LOGO_SRC = '/logo.png'
+const LOGO_SRC = '/logo.svg'
 
 export function Brand({
   className = '',

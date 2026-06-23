@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Arsana — Kontraktor Interior & Eksterior Profesional',
   description: 'Tim kontraktor profesional untuk desain interior, eksterior, konstruksi, instalasi listrik, dan AC dalam satu layanan terpadu untuk rumah dan bisnis Anda.',
-  icons: { icon: '/favicon.png' },
+  icons: { icon: '/favicon.svg' },
 }
 
 export default function RootLayout({
