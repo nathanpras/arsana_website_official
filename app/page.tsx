@@ -17,7 +17,7 @@ export default function Home() {
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-8 py-4 bg-background/80 backdrop-blur-sm border-b border-border">
         <a href="#" aria-label="Arsana — beranda">
-          <Brand />
+          <Brand imgClassName="h-10 w-auto" />
         </a>
         <div className="hidden md:flex items-center gap-8 text-muted-foreground text-sm">
           <a href="#features" className="hover:text-foreground transition-colors">Layanan</a>

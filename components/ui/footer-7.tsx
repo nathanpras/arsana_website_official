@@ -86,7 +86,7 @@ export const Footer7 = ({
         <div className="flex w-full flex-col justify-between gap-10 lg:flex-row lg:items-start lg:text-left">
           <div className="flex w-full flex-col justify-between gap-6 lg:items-start">
             <a href={logo.url} aria-label={logo.title}>
-              <Brand />
+              <Brand imgClassName="h-12 w-auto" />
             </a>
             <p className="max-w-[70%] text-sm text-muted-foreground">{description}</p>
             <ul className="flex items-center space-x-6 text-muted-foreground">
