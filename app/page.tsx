@@ -9,19 +9,16 @@ import { FinalCTA } from '@/components/ui/final-cta'
 import { ContactForm } from '@/components/ui/contact-form'
 import { Footer7 } from '@/components/ui/footer-7'
 import { WhatsAppButton } from '@/components/ui/whatsapp-button'
+import { Brand } from '@/components/ui/brand'
 
 export default function Home() {
   return (
     <main className="bg-background min-h-screen">
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-8 py-4 bg-background/80 backdrop-blur-sm border-b border-border">
-        <div className="flex flex-col leading-none">
-          <span
-            className="font-serif text-base font-bold tracking-widest uppercase bg-clip-text text-transparent"
-            style={{ backgroundImage: 'linear-gradient(105deg, #271810 0%, #7A3A18 60%, #B05030 100%)' }}
-          >Arsana</span>
-          <span className="text-[7px] tracking-[0.28em] text-muted-foreground uppercase mt-0.5">Design · Build · Elevate</span>
-        </div>
+        <a href="#" aria-label="Arsana — beranda">
+          <Brand />
+        </a>
         <div className="hidden md:flex items-center gap-8 text-muted-foreground text-sm">
           <a href="#features" className="hover:text-foreground transition-colors">Layanan</a>
           <a href="#portfolio" className="hover:text-foreground transition-colors">Portofolio</a>
@@ -31,6 +28,7 @@ export default function Home() {
         </div>
         <a
           href="#kontak"
+          data-magnetic
           className="px-4 py-2 border border-foreground/20 text-foreground text-sm font-semibold rounded-lg hover:bg-foreground/5 transition-colors"
         >
           Konsultasi via WA

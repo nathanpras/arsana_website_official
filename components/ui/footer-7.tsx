@@ -1,7 +1,9 @@
 'use client'
 
 import React from 'react'
-import { FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp } from 'react-icons/fa'
+import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa'
+import { waLink, INSTAGRAM_URL, FACEBOOK_URL } from '@/lib/contact'
+import { Brand } from '@/components/ui/brand'
 
 interface Footer7Props {
   logo?: {
@@ -40,36 +42,30 @@ const defaultSections = [
     ],
   },
   {
-    title: 'Perusahaan',
+    title: 'Jelajahi',
     links: [
-      { name: 'Tentang Kami', href: '#' },
-      { name: 'Tim Kami', href: '#' },
-      { name: 'Portofolio', href: '#' },
-      { name: 'Karir', href: '#' },
+      { name: 'Portofolio', href: '#portfolio' },
+      { name: 'Cara Kerja', href: '#process' },
+      { name: 'FAQ', href: '#faq' },
     ],
   },
   {
     title: 'Dukungan',
     links: [
-      { name: 'Konsultasi Gratis', href: '#' },
+      { name: 'Konsultasi Gratis', href: '#kontak' },
+      { name: 'Hubungi Kami', href: '#kontak' },
       { name: 'FAQ', href: '#faq' },
-      { name: 'Hubungi Kami', href: '#' },
-      { name: 'Garansi Layanan', href: '#' },
     ],
   },
 ]
 
 const defaultSocialLinks = [
-  { icon: <FaInstagram className="size-5" />, href: '#', label: 'Instagram' },
-  { icon: <FaFacebook className="size-5" />, href: '#', label: 'Facebook' },
-  { icon: <FaWhatsapp className="size-5" />, href: '#', label: 'WhatsApp' },
-  { icon: <FaLinkedin className="size-5" />, href: '#', label: 'LinkedIn' },
+  { icon: <FaInstagram className="size-5" />, href: INSTAGRAM_URL, label: 'Instagram' },
+  { icon: <FaFacebook className="size-5" />, href: FACEBOOK_URL, label: 'Facebook' },
+  { icon: <FaWhatsapp className="size-5" />, href: waLink(), label: 'WhatsApp' },
 ]
 
-const defaultLegalLinks = [
-  { name: 'Syarat & Ketentuan', href: '#' },
-  { name: 'Kebijakan Privasi', href: '#' },
-]
+const defaultLegalLinks: Array<{ name: string; href: string }> = []
 
 export const Footer7 = ({
   logo = {
@@ -89,18 +85,19 @@ export const Footer7 = ({
       <div className="container mx-auto px-6">
         <div className="flex w-full flex-col justify-between gap-10 lg:flex-row lg:items-start lg:text-left">
           <div className="flex w-full flex-col justify-between gap-6 lg:items-start">
-            <a href={logo.url} className="flex flex-col leading-none">
-              <span
-                className="font-serif text-base font-bold tracking-widest uppercase bg-clip-text text-transparent"
-                style={{ backgroundImage: 'linear-gradient(105deg, #271810 0%, #7A3A18 60%, #B05030 100%)' }}
-              >Arsana</span>
-              <span className="text-[7px] tracking-[0.28em] text-muted-foreground uppercase mt-0.5">Design · Build · Elevate</span>
+            <a href={logo.url} aria-label={logo.title}>
+              <Brand />
             </a>
             <p className="max-w-[70%] text-sm text-muted-foreground">{description}</p>
             <ul className="flex items-center space-x-6 text-muted-foreground">
               {socialLinks.map((social, idx) => (
                 <li key={idx} className="font-medium hover:text-primary transition-colors">
-                  <a href={social.href} aria-label={social.label}>
+                  <a
+                    href={social.href}
+                    aria-label={social.label}
+                    target={social.href.startsWith('http') ? '_blank' : undefined}
+                    rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  >
                     {social.icon}
                   </a>
                 </li>
@@ -124,13 +121,15 @@ export const Footer7 = ({
         </div>
         <div className="mt-8 flex flex-col justify-between gap-4 border-t border-border py-8 text-xs font-medium text-muted-foreground md:flex-row md:items-center md:text-left">
           <p className="order-2 lg:order-1">{copyright}</p>
-          <ul className="order-1 flex flex-col gap-2 md:order-2 md:flex-row">
-            {legalLinks.map((link, idx) => (
-              <li key={idx} className="hover:text-primary transition-colors">
-                <a href={link.href}>{link.name}</a>
-              </li>
-            ))}
-          </ul>
+          {legalLinks.length > 0 && (
+            <ul className="order-1 flex flex-col gap-2 md:order-2 md:flex-row">
+              {legalLinks.map((link, idx) => (
+                <li key={idx} className="hover:text-primary transition-colors">
+                  <a href={link.href}>{link.name}</a>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </section>

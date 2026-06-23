@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { TrendingUp, Clock, Eye, Target, FileX, ShieldOff } from 'lucide-react'
 
@@ -63,6 +64,64 @@ const iconAnimations = [
   { y: [0, 5, 0], duration: 3.4 },
 ]
 
+type Problem = (typeof problems)[number]
+type IconAnim = (typeof iconAnimations)[number]
+
+function ProblemCard({ p, anim, index }: { p: Problem; anim: IconAnim; index: number }) {
+  const Icon = p.icon
+  // Loop float/denyut baru aktif setelah kartu selesai masuk → tidak ada
+  // getar saat opacity/posisi masih bergerak (penyebab "glitch" saat load).
+  const [entered, setEntered] = useState(false)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      onAnimationComplete={() => setEntered(true)}
+      transition={{ duration: 0.5, delay: p.delay, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true, amount: 0.2 }}
+      className="group relative rounded-2xl border border-border bg-card card-soft p-5 hover:border-border/80 hover:-translate-y-0.5 transition-all duration-300 overflow-hidden"
+    >
+      {/* Glow blob — denyut HANYA via opacity (di-composite di GPU). */}
+      <motion.div
+        className="absolute -top-6 -right-6 w-20 h-20 rounded-full blur-2xl pointer-events-none"
+        style={{ background: p.color, willChange: 'opacity' }}
+        animate={entered ? { opacity: [0.2, 0.38, 0.2] } : { opacity: 0.2 }}
+        transition={
+          entered
+            ? { duration: 4 + index * 0.4, repeat: Infinity, ease: 'easeInOut' }
+            : { duration: 0.3 }
+        }
+      />
+
+      {/* Animated icon */}
+      <motion.div
+        className="mb-4 inline-flex"
+        animate={entered ? { y: anim.y } : { y: 0 }}
+        transition={
+          entered
+            ? { duration: anim.duration, repeat: Infinity, ease: 'easeInOut' }
+            : { duration: 0 }
+        }
+      >
+        <div
+          className="w-11 h-11 rounded-xl flex items-center justify-center"
+          style={{ background: `${p.color}18` }}
+        >
+          <Icon className="w-5 h-5" style={{ color: p.color }} strokeWidth={1.8} />
+        </div>
+      </motion.div>
+
+      <h3 className="font-semibold text-foreground text-sm mb-1.5 leading-snug">
+        {p.title}
+      </h3>
+      <p className="text-muted-foreground text-xs leading-relaxed">
+        {p.short}
+      </p>
+    </motion.div>
+  )
+}
+
 export function ProblemSection() {
   return (
     <section className="bg-[hsl(var(--panel))] py-20 overflow-hidden">
@@ -91,54 +150,9 @@ export function ProblemSection() {
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {problems.map((p, i) => {
-            const Icon = p.icon
-            const anim = iconAnimations[i]
-            return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 32, scale: 0.96 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{
-                  duration: 0.55,
-                  delay: p.delay,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                viewport={{ once: true, amount: 0.2 }}
-                className="group relative rounded-2xl border border-border bg-card card-soft p-5 hover:border-border/80 hover:-translate-y-0.5 transition-all duration-300 overflow-hidden"
-              >
-                {/* Glow blob — denyut HANYA via opacity (di-composite di GPU),
-                    tanpa scale, jadi blur tidak perlu di-render ulang = tetap hemat. */}
-                <motion.div
-                  className="absolute -top-6 -right-6 w-20 h-20 rounded-full blur-2xl pointer-events-none"
-                  style={{ background: p.color, willChange: 'opacity' }}
-                  animate={{ opacity: [0.2, 0.38, 0.2] }}
-                  transition={{ duration: 4 + i * 0.4, repeat: Infinity, ease: 'easeInOut' }}
-                />
-
-                {/* Animated icon */}
-                <motion.div
-                  className="mb-4 inline-flex"
-                  animate={{ y: anim.y }}
-                  transition={{ duration: anim.duration, repeat: Infinity, ease: 'easeInOut' }}
-                >
-                  <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center"
-                    style={{ background: `${p.color}18` }}
-                  >
-                    <Icon className="w-5 h-5" style={{ color: p.color }} strokeWidth={1.8} />
-                  </div>
-                </motion.div>
-
-                <h3 className="font-semibold text-foreground text-sm mb-1.5 leading-snug">
-                  {p.title}
-                </h3>
-                <p className="text-muted-foreground text-xs leading-relaxed">
-                  {p.short}
-                </p>
-              </motion.div>
-            )
-          })}
+          {problems.map((p, i) => (
+            <ProblemCard key={i} p={p} anim={iconAnimations[i]} index={i} />
+          ))}
         </div>
 
         {/* Answer strip */}

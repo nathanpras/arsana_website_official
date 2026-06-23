@@ -1,7 +1,10 @@
 'use client'
 
+import { useState } from 'react'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { MapPin, Clock, Layers, ArrowUpRight } from 'lucide-react'
+import { PortfolioLightbox } from '@/components/ui/portfolio-lightbox'
 
 const projects = [
   {
@@ -176,6 +179,8 @@ const projects = [
 ]
 
 export function Portfolio() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+
   return (
     <section className="bg-[hsl(var(--panel))] py-24">
       <div className="container mx-auto px-6">
@@ -215,11 +220,22 @@ export function Portfolio() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
               viewport={{ once: true }}
+              onClick={() => setOpenIndex(i)}
               className={`group relative rounded-2xl overflow-hidden border border-border aspect-[4/3] cursor-pointer ${project.size}`}
             >
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                style={{ backgroundImage: `url(${project.image})` }}
+              <Image
+                src={project.image}
+                alt={`${project.category} — ${project.title}, ${project.location}`}
+                fill
+                quality={90}
+                priority={i === 0}
+                loading={i === 0 ? undefined : 'lazy'}
+                sizes={
+                  project.size === 'lg:col-span-2'
+                    ? '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 66vw'
+                    : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
+                }
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/10" />
 
@@ -277,6 +293,13 @@ export function Portfolio() {
           ))}
         </div>
       </div>
+
+      <PortfolioLightbox
+        projects={projects}
+        index={openIndex}
+        onClose={() => setOpenIndex(null)}
+        onIndexChange={setOpenIndex}
+      />
     </section>
   )
 }

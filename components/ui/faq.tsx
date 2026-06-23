@@ -40,12 +40,12 @@ const faqs = [
   {
     question: 'Apakah ada garansi setelah proyek selesai?',
     answer:
-      'Ya. Setiap pekerjaan dilindungi garansi resmi. Paket Dasar mencakup garansi 6 bulan, Paket Profesional 1 tahun, dan Paket Premium hingga 2 tahun. Garansi mencakup perbaikan cacat material dan pengerjaan tanpa biaya tambahan.',
+      'Ya. Setiap pekerjaan dilindungi garansi resmi yang tercantum dalam kontrak — mencakup perbaikan cacat material dan pengerjaan tanpa biaya tambahan, hingga 2 tahun tergantung lingkup proyek. Durasi garansi disepakati di awal sebelum pekerjaan dimulai.',
   },
   {
     question: 'Wilayah mana saja yang dilayani Arsana?',
     answer:
-      'Kami melayani proyek di Jakarta, Bali, dan Surabaya. Untuk proyek di luar ketiga kota tersebut, silakan hubungi kami langsung — kami terbuka untuk diskusi berdasarkan skala dan lokasi proyek.',
+      'Arsana berpusat di Jakarta dan sekitarnya (Jabodetabek) dan melayani proyek skala apa pun di area ini. Untuk luar daerah seperti Bali dan kota lain, kami terbuka terutama untuk proyek berskala besar — silakan hubungi kami untuk berdiskusi sesuai lingkup dan lokasi proyek.',
   },
 ]
 
