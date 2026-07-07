@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 import { Circle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { TextRotate } from '@/components/ui/text-rotate'
@@ -20,6 +21,11 @@ function ElegantShape({
   rotate?: number
   gradient?: string
 }) {
+  // Loop float dijeda saat shape di luar viewport — sama persis selama
+  // terlihat, hanya berhenti buang siklus saat sudah di-scroll lewat.
+  const floatRef = useRef(null)
+  const inView = useInView(floatRef, { amount: 0 })
+
   return (
     <motion.div
       initial={{ opacity: 0, y: -150, rotate: rotate - 15 }}
@@ -33,8 +39,9 @@ function ElegantShape({
       className={cn('absolute', className)}
     >
       <motion.div
-        animate={{ y: [0, 15, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+        ref={floatRef}
+        animate={inView ? { y: [0, 15, 0] } : { y: 0 }}
+        transition={inView ? { duration: 12, repeat: Infinity, ease: 'easeInOut' } : { duration: 0.3 }}
         style={{ width, height }}
         className="relative"
       >
@@ -73,7 +80,7 @@ export function SplineSceneBasic() {
       {/* Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 mix-blend-multiply"
-        style={{ backgroundImage: "url('/hero-bg.png')" }}
+        style={{ backgroundImage: "url('/hero-bg.webp')" }}
       />
       {/* Warm fade overlay to blend image with background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background/80 via-background/40 to-orange-50/60 pointer-events-none" />

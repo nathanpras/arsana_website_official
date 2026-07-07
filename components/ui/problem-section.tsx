@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useRef, useState } from 'react'
+import { motion, useInView } from 'framer-motion'
 import { TrendingUp, Clock, Eye, Target, FileX, ShieldOff } from 'lucide-react'
 
 const problems = [
@@ -72,9 +72,15 @@ function ProblemCard({ p, anim, index }: { p: Problem; anim: IconAnim; index: nu
   // Loop float/denyut baru aktif setelah kartu selesai masuk → tidak ada
   // getar saat opacity/posisi masih bergerak (penyebab "glitch" saat load).
   const [entered, setEntered] = useState(false)
+  // Loop dijeda lagi saat kartu discroll keluar layar — sama persis selama
+  // terlihat, hanya berhenti buang siklus saat sudah lewat dari viewport.
+  const cardRef = useRef(null)
+  const inView = useInView(cardRef, { amount: 0.2 })
+  const active = entered && inView
 
   return (
     <motion.div
+      ref={cardRef}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       onAnimationComplete={() => setEntered(true)}
@@ -86,9 +92,9 @@ function ProblemCard({ p, anim, index }: { p: Problem; anim: IconAnim; index: nu
       <motion.div
         className="absolute -top-6 -right-6 w-20 h-20 rounded-full blur-2xl pointer-events-none"
         style={{ background: p.color, willChange: 'opacity' }}
-        animate={entered ? { opacity: [0.2, 0.38, 0.2] } : { opacity: 0.2 }}
+        animate={active ? { opacity: [0.2, 0.38, 0.2] } : { opacity: 0.2 }}
         transition={
-          entered
+          active
             ? { duration: 4 + index * 0.4, repeat: Infinity, ease: 'easeInOut' }
             : { duration: 0.3 }
         }
@@ -97,9 +103,9 @@ function ProblemCard({ p, anim, index }: { p: Problem; anim: IconAnim; index: nu
       {/* Animated icon */}
       <motion.div
         className="mb-4 inline-flex"
-        animate={entered ? { y: anim.y } : { y: 0 }}
+        animate={active ? { y: anim.y } : { y: 0 }}
         transition={
-          entered
+          active
             ? { duration: anim.duration, repeat: Infinity, ease: 'easeInOut' }
             : { duration: 0 }
         }

@@ -55,6 +55,7 @@ html {
 }
 
 body {
+  position: relative;
   background: hsl(var(--background));
   color: hsl(var(--foreground));
   -webkit-font-smoothing: antialiased;
@@ -142,8 +143,13 @@ body {
 }
 
 /* ── Film grain halus di atas seluruh halaman ───────────────────────────── */
+/* `absolute` (bukan `fixed`) sengaja dipilih: elemen fixed + mix-blend-mode
+   memaksa browser blend ulang SELURUH halaman di tiap frame scroll (biang
+   utama scroll jank). `absolute` ikut mengalir bareng dokumen (body relative
+   di atas), jadi cukup dilukis sekali — teksturnya berupa noise acak jadi
+   tidak ada bedanya kasat mata antara "ikut discroll" vs "menempel di layar". */
 .grain-overlay {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 40; /* di atas konten, di bawah navbar (z-50) & lightbox (z-100) */
   pointer-events: none;
