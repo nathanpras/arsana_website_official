@@ -1,7 +1,7 @@
 import { SplineSceneBasic } from '@/components/ui/splite'
 import { ProblemSection } from '@/components/ui/problem-section'
 import { TrustSection } from '@/components/ui/trust-section'
-import { Component as InfiniteGrid } from '@/components/ui/the-infinite-grid'
+import { ServicesShowcase } from '@/components/ui/services-showcase'
 import { Portfolio } from '@/components/ui/portfolio'
 import { ProcessSteps } from '@/components/ui/process-steps'
 import { FAQ } from '@/components/ui/faq'
@@ -52,7 +52,7 @@ export default function Home() {
 
       {/* 4. Layanan */}
       <section id="features" className="border-t border-border">
-        <InfiniteGrid />
+        <ServicesShowcase />
       </section>
 
       {/* 5. Portofolio */}
