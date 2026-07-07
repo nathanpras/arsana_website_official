@@ -44,7 +44,7 @@ const steps = [
 
 export function ProcessSteps() {
   return (
-    <GridBackground patternId="process">
+    <GridBackground>
       <section className="py-24">
         <div className="container mx-auto px-6">
         <motion.div

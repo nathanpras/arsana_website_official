@@ -1,15 +1,12 @@
 export function GridBackground({
   children,
-  patternId,
   tone = 'cream',
 }: {
   children: React.ReactNode
-  patternId: string
   tone?: 'cream' | 'panel'
 }) {
   return (
     <div
-      data-grid={patternId}
       className={`relative overflow-hidden ${tone === 'panel' ? 'bg-[hsl(var(--panel))]' : 'bg-background'}`}
     >
       {/* Cahaya hangat lembut & statis — pengganti grid+mask yang mengikuti

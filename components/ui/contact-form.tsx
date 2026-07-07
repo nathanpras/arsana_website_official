@@ -51,7 +51,7 @@ export function ContactForm() {
   }
 
   return (
-    <GridBackground patternId="contact">
+    <GridBackground>
       <section id="kontak" className="py-24">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
