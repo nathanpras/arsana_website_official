@@ -15,6 +15,7 @@ import {
   motion,
   MotionProps,
   Transition,
+  useInView,
 } from "framer-motion"
 
 import { cn } from "@/lib/utils"
@@ -78,16 +79,10 @@ const TextRotate = forwardRef<TextRotateRef, TextRotateProps>(
     const [currentTextIndex, setCurrentTextIndex] = useState(0)
     // Interval rotasi dijeda saat komponen di luar viewport — perilaku
     // identik selama terlihat, cuma berhenti putar saat sudah discroll lewat.
+    // Pakai useInView (framer-motion, sudah dipakai di file lain untuk hal
+    // yang sama) daripada IntersectionObserver manual.
     const containerRef = useRef<HTMLSpanElement>(null)
-    const [isInView, setIsInView] = useState(true)
-
-    useEffect(() => {
-      const el = containerRef.current
-      if (!el || typeof IntersectionObserver === "undefined") return
-      const io = new IntersectionObserver(([entry]) => setIsInView(entry.isIntersecting), { threshold: 0 })
-      io.observe(el)
-      return () => io.disconnect()
-    }, [])
+    const isInView = useInView(containerRef, { amount: 0 })
 
     const splitIntoCharacters = (text: string): string[] => {
       if (typeof Intl !== "undefined" && "Segmenter" in Intl) {
