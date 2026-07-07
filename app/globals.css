@@ -77,32 +77,6 @@ body {
   }
 }
 
-/* Grid latar yang bergeser pelan — dianimasikan via transform (compositor/GPU),
-   bukan dengan menggambar ulang SVG tiap frame. Halus & nyaris tanpa beban. */
-.grid-drift {
-  position: absolute;
-  inset: -40px; /* sedikit lebih besar dari area agar tidak ada celah saat bergeser */
-  background-image:
-    linear-gradient(to right, hsl(var(--muted-foreground)) 1px, transparent 1px),
-    linear-gradient(to bottom, hsl(var(--muted-foreground)) 1px, transparent 1px);
-  background-size: 40px 40px;
-  will-change: transform;
-  transform: translateZ(0);
-  animation: grid-drift 7s linear infinite;
-}
-
-/* Dijeda otomatis saat keluar dari layar (hemat baterai). */
-.grid-drift--paused {
-  animation-play-state: paused;
-}
-
-@keyframes grid-drift {
-  to {
-    /* tepat satu petak (40px) → looping mulus tanpa lompatan */
-    transform: translate3d(40px, 40px, 0);
-  }
-}
-
 /* Aurora bercahaya untuk section CTA — bercak warna lembut yang mengalir.
    Murni transform (GPU), tanpa filter blur, jadi mulus & tidak bikin panas. */
 .cta-aurora {
