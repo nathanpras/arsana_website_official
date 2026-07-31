@@ -17,7 +17,7 @@ const services: Service[] = [
   {
     title: 'Bangun Rumah',
     description: 'Pembangunan rumah dari nol: perencanaan, struktur, arsitektur, MEP, hingga finishing. Untuk hunian tinggal dan rumah investasi.',
-    image: '/projects/Arsana%20Foto%20Recreate/GoldCoast/This_image_is_already_correct_202606212117.jpeg',
+    image: '/projects/goldcoast/02.webp',
     price: 'Mulai Rp 4 Jt',
     unit: '/m²',
     cta: 'Konsultasi Sekarang',
@@ -25,7 +25,7 @@ const services: Service[] = [
   {
     title: 'Renovasi Rumah',
     description: 'Renovasi sebagian atau total: fasad, dapur, kamar mandi, lantai, plafon, layout, dan perbaikan struktur.',
-    image: '/projects/Arsana%20Foto%20Recreate/Cipondoh%20Showroom%20Marmer/Recreate_this_photograph_at_professional_202606221029.jpeg',
+    image: '/projects/cipondoh-showroom-marmer/04.webp',
     price: 'Mulai Rp 2 Jt',
     unit: '/m²',
     cta: 'Kirim Foto Lokasi',
@@ -33,7 +33,7 @@ const services: Service[] = [
   {
     title: 'Desain Rumah',
     description: 'Desain arsitektur rumah tinggal: denah, tampak, visualisasi 3D, hingga gambar kerja siap bangun.',
-    image: '/projects/Arsana%20Foto%20Recreate/Bangka%20Mampang/Recreate_this_photograph_at_professional_202606212111.jpeg',
+    image: '/projects/bangka-mampang/02.webp',
     price: 'Mulai Rp 75 Rb',
     unit: '/m²',
     cta: 'Konsultasi Desain',
@@ -41,7 +41,7 @@ const services: Service[] = [
   {
     title: 'Desain Interior',
     description: 'Desain interior ruang: layout, material, pencahayaan, dan visualisasi 3D sebelum eksekusi.',
-    image: '/projects/Arsana%20Foto%20Recreate/Taman%20Kencana/Recreate_this_photograph_at_professional_202606221030.jpeg',
+    image: '/projects/taman-kencana/01.webp',
     price: 'Mulai Rp 75 Rb',
     unit: '/m²',
     cta: 'Konsultasi Desain',
@@ -49,7 +49,7 @@ const services: Service[] = [
   {
     title: 'Furniture Custom',
     description: 'Kitchen set, lemari, meja, dan furniture custom sesuai ukuran & gaya ruang Anda.',
-    image: '/projects/Arsana%20Foto%20Recreate/Coffee%20Ground%20Cafe/Recreate_this_photograph_at_professional_202606212155.jpeg',
+    image: '/projects/coffee-ground-cafe/02.webp',
     price: 'Mulai Rp 1,5 Jt',
     unit: '/m²',
     cta: 'Diskusi Kebutuhan',
@@ -57,7 +57,7 @@ const services: Service[] = [
   {
     title: 'Bangunan Komersial',
     description: 'Ruko, kantor, cafe, gudang, klinik, dan ruang usaha dengan alur kerja yang lebih terukur dan spesifikasi bisnis.',
-    image: '/projects/Arsana%20Foto%20Recreate/Bozz%20Billiard%20Citra%208/Recreate_this_photograph_at_professional_202606212158.jpeg',
+    image: '/projects/bozz-billiard-citra-8/02.webp',
     price: 'Custom',
     unit: '',
     cta: 'Jadwalkan Survey',
@@ -65,7 +65,7 @@ const services: Service[] = [
   {
     title: 'Instalasi Listrik',
     description: 'Sistem kelistrikan standar SNI dengan teknisi bersertifikat.',
-    image: '/projects/Arsana%20Foto%20Recreate/Suvarna%20Sutra%20Andara/01_Suvarna-Sutra-Andara_fasad-malam_2018.jpeg_202606212116.jpeg',
+    image: '/projects/suvarna-sutra-andara/01.webp',
     price: 'Custom',
     unit: '',
     cta: 'Konsultasi Sekarang',
@@ -73,7 +73,7 @@ const services: Service[] = [
   {
     title: 'Instalasi AC',
     description: 'Instalasi dan maintenance AC residensial maupun komersial.',
-    image: '/projects/Arsana%20Foto%20Recreate/NavaPark%20BSD/This_image_is_already_correct_202606212123.jpeg',
+    image: '/projects/navapark-bsd/02.webp',
     price: 'Custom',
     unit: '',
     cta: 'Konsultasi Sekarang',
