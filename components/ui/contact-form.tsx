@@ -2,9 +2,9 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Send, MapPin, MessageCircle, Phone } from 'lucide-react'
+import { Send, MapPin, MessageCircle, Mail, Phone } from 'lucide-react'
 import { GridBackground } from '@/components/ui/grid-background'
-import { waLink } from '@/lib/contact'
+import { waLink, mailLink, WHATSAPP_DISPLAY, EMAIL } from '@/lib/contact'
 
 const projectTypes = [
   'Bangun Rumah Baru',
@@ -91,7 +91,32 @@ export function ContactForm() {
                   </div>
                   <div>
                     <p className="font-semibold text-foreground text-sm">Chat via WhatsApp</p>
-                    <p className="text-muted-foreground text-sm">+62 812-3456-7890 · Respon dalam 1 jam kerja</p>
+                    <a
+                      href={waLink()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground text-sm hover:text-foreground transition-colors"
+                    >
+                      {WHATSAPP_DISPLAY}
+                    </a>
+                    <p className="text-muted-foreground text-sm">Respon dalam 1 jam kerja</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{ background: 'linear-gradient(135deg, #C4683020, #E8A87015)' }}
+                  >
+                    <Mail className="w-5 h-5" style={{ color: '#E8A870' }} />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground text-sm">Email</p>
+                    <a
+                      href={mailLink('Konsultasi Proyek')}
+                      className="text-muted-foreground text-sm hover:text-foreground transition-colors break-all"
+                    >
+                      {EMAIL}
+                    </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">

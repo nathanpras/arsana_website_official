@@ -5,6 +5,7 @@ import { motion, useInView } from 'framer-motion'
 import { Circle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { TextRotate } from '@/components/ui/text-rotate'
+import { YEARS_EXPERIENCE } from '@/lib/contact'
 
 function ElegantShape({
   className,
@@ -223,7 +224,7 @@ export function SplineSceneBasic() {
                     WebkitTextFillColor: 'transparent',
                   }}
                 >
-                  15 Thn+
+                  {YEARS_EXPERIENCE} Thn
                 </span>
                 <span className="text-sm text-stone-500">Pengalaman</span>
               </div>

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa'
-import { waLink, INSTAGRAM_URL, FACEBOOK_URL } from '@/lib/contact'
+import { waLink, mailLink, INSTAGRAM_URL, FACEBOOK_URL, EMAIL, WHATSAPP_DISPLAY } from '@/lib/contact'
 import { Brand } from '@/components/ui/brand'
 
 interface Footer7Props {
@@ -59,11 +59,12 @@ const defaultSections = [
   },
 ]
 
+// Ikon dengan URL kosong otomatis disaring, supaya tidak ada link mati di footer.
 const defaultSocialLinks = [
   { icon: <FaInstagram className="size-5" />, href: INSTAGRAM_URL, label: 'Instagram' },
   { icon: <FaFacebook className="size-5" />, href: FACEBOOK_URL, label: 'Facebook' },
   { icon: <FaWhatsapp className="size-5" />, href: waLink(), label: 'WhatsApp' },
-]
+].filter((s) => s.href && s.href !== '#')
 
 const defaultLegalLinks: Array<{ name: string; href: string }> = []
 
@@ -77,7 +78,7 @@ export const Footer7 = ({
   sections = defaultSections,
   description = 'Tim kontraktor profesional untuk desain interior, eksterior, konstruksi, instalasi listrik, dan AC dalam satu layanan terpadu.',
   socialLinks = defaultSocialLinks,
-  copyright = '© 2025 Arsana. Hak cipta dilindungi.',
+  copyright = `© ${new Date().getFullYear()} Arsana. Hak cipta dilindungi.`,
   legalLinks = defaultLegalLinks,
 }: Footer7Props) => {
   return (
@@ -89,6 +90,19 @@ export const Footer7 = ({
               <Brand imgClassName="h-12 w-auto" />
             </a>
             <p className="max-w-[70%] text-sm text-muted-foreground">{description}</p>
+            <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+              <a
+                href={waLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
+              >
+                {WHATSAPP_DISPLAY}
+              </a>
+              <a href={mailLink()} className="hover:text-primary transition-colors break-all">
+                {EMAIL}
+              </a>
+            </div>
             <ul className="flex items-center space-x-6 text-muted-foreground">
               {socialLinks.map((social, idx) => (
                 <li key={idx} className="font-medium hover:text-primary transition-colors">
