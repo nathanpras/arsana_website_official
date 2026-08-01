@@ -181,7 +181,9 @@ const projects = [
 export function Portfolio() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const scrollerRef = useRef<HTMLDivElement>(null)
-  const [progress, setProgress] = useState(0)
+  const trackRef = useRef<HTMLDivElement>(null)
+  // Lebar & posisi thumb scrollbar dalam persen terhadap track.
+  const [thumb, setThumb] = useState({ width: 100, left: 0 })
   const [atStart, setAtStart] = useState(true)
   const [atEnd, setAtEnd] = useState(false)
 
@@ -193,7 +195,11 @@ export function Portfolio() {
     const el = scrollerRef.current
     if (!el) return
     const max = el.scrollWidth - el.clientWidth
-    setProgress(max > 0 ? el.scrollLeft / max : 0)
+    const progress = max > 0 ? el.scrollLeft / max : 0
+    // Lebar thumb mencerminkan porsi rail yang terlihat, dengan batas bawah
+    // 10% supaya tetap gampang ditarik saat proyeknya banyak.
+    const width = Math.max((el.clientWidth / el.scrollWidth) * 100, 10)
+    setThumb({ width, left: progress * (100 - width) })
     setAtStart(el.scrollLeft <= 8)
     setAtEnd(el.scrollLeft >= max - 8)
   }, [])
@@ -247,6 +253,48 @@ export function Portfolio() {
   const openProject = (i: number) => {
     if (drag.current.moved) return
     setOpenIndex(i)
+  }
+
+  // ── Scrollbar kustom ────────────────────────────────────────────────────
+  const thumbDrag = useRef({ active: false, startX: 0, startScroll: 0 })
+
+  const onThumbDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = scrollerRef.current
+    if (!el) return
+    e.stopPropagation() // jangan diteruskan ke track (klik lompat posisi)
+    thumbDrag.current = { active: true, startX: e.clientX, startScroll: el.scrollLeft }
+    el.style.scrollSnapType = 'none' // snap dimatikan saat menarik, dipasang lagi saat lepas
+    e.currentTarget.setPointerCapture(e.pointerId)
+  }
+
+  const onThumbMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!thumbDrag.current.active) return
+    const el = scrollerRef.current
+    const track = trackRef.current
+    if (!el || !track) return
+    // 1px gerakan thumb = (jarak scroll total / sisa ruang gerak thumb) px scroll
+    const travel = track.clientWidth * (1 - thumb.width / 100)
+    if (travel <= 0) return
+    const max = el.scrollWidth - el.clientWidth
+    el.scrollLeft = thumbDrag.current.startScroll + ((e.clientX - thumbDrag.current.startX) * max) / travel
+  }
+
+  const onThumbUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!thumbDrag.current.active) return
+    thumbDrag.current.active = false
+    const el = scrollerRef.current
+    if (el) el.style.scrollSnapType = ''
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) e.currentTarget.releasePointerCapture(e.pointerId)
+  }
+
+  // Klik di area kosong track: lompat mulus ke posisi itu.
+  const onTrackDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = scrollerRef.current
+    const track = trackRef.current
+    if (!el || !track) return
+    const rect = track.getBoundingClientRect()
+    const ratio = Math.min(Math.max((e.clientX - rect.left) / rect.width, 0), 1)
+    el.scrollTo({ left: ratio * (el.scrollWidth - el.clientWidth), behavior: 'smooth' })
   }
 
   return (
@@ -389,17 +437,20 @@ export function Portfolio() {
           ))}
         </div>
 
-        {/* Indikator posisi scroll */}
-        <div className="mt-8 flex items-center gap-4">
-          <div className="relative h-[2px] flex-1 bg-border rounded-full overflow-hidden">
-            <div
-              className="absolute inset-y-0 left-0 bg-foreground/60 rounded-full transition-[width] duration-300 ease-out"
-              style={{ width: `${Math.max(progress * 100, 6)}%` }}
-            />
-          </div>
-          <span className="text-xs text-muted-foreground tabular-nums shrink-0">
-            {Math.round(progress * (projects.length - 1)) + 1} / {projects.length}
-          </span>
+        {/* Scrollbar kustom — bisa ditarik kiri-kanan */}
+        <div
+          ref={trackRef}
+          onPointerDown={onTrackDown}
+          className="group/bar relative mt-8 h-1.5 rounded-full bg-border cursor-pointer"
+        >
+          <div
+            onPointerDown={onThumbDown}
+            onPointerMove={onThumbMove}
+            onPointerUp={onThumbUp}
+            onPointerCancel={onThumbUp}
+            style={{ width: `${thumb.width}%`, left: `${thumb.left}%` }}
+            className="absolute inset-y-0 rounded-full bg-foreground/40 group-hover/bar:bg-foreground/60 cursor-grab active:cursor-grabbing active:bg-foreground/70 transition-colors duration-200 before:absolute before:-inset-y-3 before:inset-x-0 before:content-['']"
+          />
         </div>
       </div>
 
