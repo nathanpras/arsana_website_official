@@ -116,6 +116,15 @@ body {
   50% { transform: translate3d(8%, -10%, 0) scale(1.2); }
 }
 
+/* Sembunyikan scrollbar pada rail kartu horizontal (portofolio), scroll tetap jalan */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* ── Film grain halus di atas seluruh halaman ───────────────────────────── */
 /* `absolute` (bukan `fixed`) sengaja dipilih: elemen fixed + mix-blend-mode
    memaksa browser blend ulang SELURUH halaman di tiap frame scroll (biang

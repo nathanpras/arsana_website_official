@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { MapPin, Clock, Layers, ArrowUpRight } from 'lucide-react'
+import { MapPin, Clock, Layers, ArrowUpRight, ArrowLeft, ArrowRight } from 'lucide-react'
 import { PortfolioLightbox } from '@/components/ui/portfolio-lightbox'
 
 const projects = [
@@ -180,9 +180,77 @@ const projects = [
 
 export function Portfolio() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const scrollerRef = useRef<HTMLDivElement>(null)
+  const [progress, setProgress] = useState(0)
+  const [atStart, setAtStart] = useState(true)
+  const [atEnd, setAtEnd] = useState(false)
+
+  // Drag-to-scroll pakai mouse; layar sentuh sudah bisa swipe sendiri.
+  // `moved` dipakai untuk menahan klik agar drag tidak membuka lightbox.
+  const drag = useRef({ active: false, moved: false, startX: 0, startScroll: 0 })
+
+  const updateScrollState = useCallback(() => {
+    const el = scrollerRef.current
+    if (!el) return
+    const max = el.scrollWidth - el.clientWidth
+    setProgress(max > 0 ? el.scrollLeft / max : 0)
+    setAtStart(el.scrollLeft <= 8)
+    setAtEnd(el.scrollLeft >= max - 8)
+  }, [])
+
+  useEffect(() => {
+    updateScrollState()
+    window.addEventListener('resize', updateScrollState)
+    return () => window.removeEventListener('resize', updateScrollState)
+  }, [updateScrollState])
+
+  const scrollByCard = (direction: 1 | -1) => {
+    const el = scrollerRef.current
+    if (!el) return
+    const card = el.querySelector('[data-card]') as HTMLElement | null
+    const step = card ? card.offsetWidth + 16 : el.clientWidth * 0.8
+    el.scrollBy({ left: step * direction, behavior: 'smooth' })
+  }
+
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== 'mouse') return
+    const el = scrollerRef.current
+    if (!el) return
+    drag.current = { active: true, moved: false, startX: e.clientX, startScroll: el.scrollLeft }
+  }
+
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!drag.current.active) return
+    const el = scrollerRef.current
+    if (!el) return
+    const delta = e.clientX - drag.current.startX
+    // Capture baru diaktifkan setelah jelas ini drag, bukan klik. Kalau capture
+    // dipasang sejak pointerdown, event click dialihkan ke container ini dan
+    // kartu tidak pernah menerima klik (lightbox tak terbuka).
+    if (!drag.current.moved && Math.abs(delta) > 5) {
+      drag.current.moved = true
+      el.style.scrollSnapType = 'none'
+      el.setPointerCapture(e.pointerId)
+    }
+    if (drag.current.moved) el.scrollLeft = drag.current.startScroll - delta
+  }
+
+  const endDrag = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!drag.current.active) return
+    drag.current.active = false
+    const el = scrollerRef.current
+    if (!el) return
+    el.style.scrollSnapType = ''
+    if (el.hasPointerCapture(e.pointerId)) el.releasePointerCapture(e.pointerId)
+  }
+
+  const openProject = (i: number) => {
+    if (drag.current.moved) return
+    setOpenIndex(i)
+  }
 
   return (
-    <section className="bg-[hsl(var(--panel))] py-24">
+    <section className="bg-[hsl(var(--panel))] py-24 overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <motion.div
@@ -201,27 +269,58 @@ export function Portfolio() {
               Proyek Asli Kami
             </h2>
           </motion.div>
-          <motion.p
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-muted-foreground max-w-xs text-sm leading-relaxed"
+            className="flex items-end gap-6"
           >
-            Studi kasus nyata dengan lokasi, durasi, dan lingkup pekerjaan yang jelas — bukan sekadar foto.
-          </motion.p>
+            <p className="text-muted-foreground max-w-xs text-sm leading-relaxed">
+              Studi kasus nyata dengan lokasi, durasi, dan lingkup pekerjaan yang jelas — bukan sekadar foto.
+            </p>
+            <div className="hidden md:flex items-center gap-2 shrink-0">
+              <button
+                type="button"
+                aria-label="Proyek sebelumnya"
+                onClick={() => scrollByCard(-1)}
+                disabled={atStart}
+                className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground transition-all duration-300 hover:bg-foreground hover:text-background disabled:opacity-30 disabled:pointer-events-none active:scale-95"
+              >
+                <ArrowLeft className="w-4 h-4" />
+              </button>
+              <button
+                type="button"
+                aria-label="Proyek berikutnya"
+                onClick={() => scrollByCard(1)}
+                disabled={atEnd}
+                className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground transition-all duration-300 hover:bg-foreground hover:text-background disabled:opacity-30 disabled:pointer-events-none active:scale-95"
+              >
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 grid-flow-row-dense">
+        <div
+          ref={scrollerRef}
+          onScroll={updateScrollState}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+          className="no-scrollbar flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth -mx-6 px-6 pb-2 select-none cursor-grab active:cursor-grabbing [scroll-padding-left:1.5rem]"
+        >
           {projects.map((project, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, delay: Math.min(i, 5) * 0.08, ease: [0.16, 1, 0.3, 1] }}
               viewport={{ once: true }}
-              onClick={() => setOpenIndex(i)}
-              className={`group relative rounded-2xl overflow-hidden border border-border aspect-[4/3] cursor-pointer ${project.size}`}
+              onClick={() => openProject(i)}
+              data-card
+              className="group relative shrink-0 snap-start w-[80vw] sm:w-[380px] lg:w-[420px] rounded-2xl overflow-hidden border border-border aspect-[4/3] cursor-pointer transition-transform duration-500 hover:-translate-y-1"
             >
               <Image
                 src={project.image}
@@ -230,11 +329,8 @@ export function Portfolio() {
                 quality={90}
                 priority={i === 0}
                 loading={i === 0 ? undefined : 'lazy'}
-                sizes={
-                  project.size === 'lg:col-span-2'
-                    ? '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 66vw'
-                    : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
-                }
+                sizes="(max-width: 640px) 80vw, (max-width: 1024px) 380px, 420px"
+                draggable={false}
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/10" />
@@ -291,6 +387,19 @@ export function Portfolio() {
               </div>
             </motion.div>
           ))}
+        </div>
+
+        {/* Indikator posisi scroll */}
+        <div className="mt-8 flex items-center gap-4">
+          <div className="relative h-[2px] flex-1 bg-border rounded-full overflow-hidden">
+            <div
+              className="absolute inset-y-0 left-0 bg-foreground/60 rounded-full transition-[width] duration-300 ease-out"
+              style={{ width: `${Math.max(progress * 100, 6)}%` }}
+            />
+          </div>
+          <span className="text-xs text-muted-foreground tabular-nums shrink-0">
+            {Math.round(progress * (projects.length - 1)) + 1} / {projects.length}
+          </span>
         </div>
       </div>
 
