@@ -1,0 +1,56 @@
+{
+  "name": "Arsana",
+  "tagline": "Design · Build · Elevate.",
+  "colors": {
+    "gold": "#AF8431",
+    "ink": "#241812",
+    "cream": "#F6F3EE"
+  },
+  "lockups": {
+    "monogram": {
+      "aspect": 1.0,
+      "files": [
+        "arsana-monogram.svg",
+        "arsana-monogram-1024.png",
+        "arsana-monogram-512.png",
+        "arsana-monogram-white.svg",
+        "arsana-monogram-white-1024.png",
+        "arsana-monogram-white-512.png"
+      ]
+    },
+    "wordmark": {
+      "aspect": 3.365,
+      "files": [
+        "arsana-wordmark.svg",
+        "arsana-wordmark-2000.png",
+        "arsana-wordmark-white.svg",
+        "arsana-wordmark-white-2000.png",
+        "arsana-wordmark-dark.svg",
+        "arsana-wordmark-dark-2000.png"
+      ]
+    },
+    "portrait": {
+      "aspect": 1.132,
+      "files": [
+        "arsana-portrait.svg",
+        "arsana-portrait-1600.png",
+        "arsana-portrait-white.svg",
+        "arsana-portrait-white-1600.png",
+        "arsana-portrait-dark.svg",
+        "arsana-portrait-dark-1600.png"
+      ]
+    },
+    "landscape": {
+      "aspect": 3.203,
+      "files": [
+        "arsana-landscape.svg",
+        "arsana-landscape-2400.png",
+        "arsana-landscape-white.svg",
+        "arsana-landscape-white-2400.png",
+        "arsana-landscape-dark.svg",
+        "arsana-landscape-dark-2400.png"
+      ]
+    }
+  },
+  "notes": "Vector traced from the original logo artwork. Text is outlined, not live type. Colours sampled from the source: gold #AF8431, ink #241812, cream #F6F3EE."
+}
