@@ -25,24 +25,63 @@ sanggup mengerjakan rumah kelas menengah-atas, dan mau lanjut ke konsultasi.
 
 ## Struktur dokumen
 
+Jumlah halaman menyesuaikan stok foto (lihat "Halaman proyek adaptif").
+Saat ini sekitar 15 halaman, tumbuh ke 18–20 setelah foto baru masuk.
+
 | Hal. | Isi | Sumber data |
 |---|---|---|
-| 1 | Sampul — logo, tagline, satu foto proyek terkuat | brand + foto |
+| 1 | Sampul — logo, tagline, satu foto nyata terkuat | brand + foto |
 | 2 | Pembuka — Arsana dalam 3 kalimat | ditulis, perlu review user |
 | 3 | Tentang — legalitas, tahun berdiri, alamat kantor | **penanda, user isi** |
 | 4 | Angka — proyek selesai, tahun pengalaman, luas dikerjakan | **penanda, user isi** |
 | 5 | Layanan — bangun baru, renovasi, casco, interior, komersial | ditulis |
 | 6 | Cara kerja — konsultasi → serah terima | ditulis |
-| 7–16 | 5 proyek andalan × 2 halaman | foto + data proyek |
-| 17 | Proyek lain — daftar teks, **tanpa foto** | photos-archive |
-| 18 | Penutup — ajakan konsultasi, kontak, QR ke website | **penanda, user isi** |
+| 7 | Pembatas bagian — "Karya Terbangun" | — |
+| 8–… | Proyek terbangun, adaptif 1–2 halaman per proyek | foto nyata |
+| … | Pembatas bagian — "Visualisasi Desain" | — |
+| … | Render / visualisasi desain | render |
+| … | Proyek lain — daftar teks, **tanpa foto** | photos-archive |
+| akhir | Penutup — ajakan konsultasi, kontak, QR ke website | **penanda, user isi** |
 
-### Halaman proyek (pola 2 halaman)
+### Pemisahan karya terbangun dan visualisasi desain
 
-- **Halaman kiri:** satu foto besar full-bleed, tanpa bingkai. Nama proyek
-  ditempatkan di area foto yang paling kosong.
-- **Halaman kanan:** data proyek (lokasi, tahun, durasi, lingkup kerja),
-  paragraf singkat 2–3 kalimat, dan 2–3 foto pendukung ukuran kecil.
+Isi `photos-src/` bercampur tiga jenis: foto hasil jadi, foto proses konstruksi,
+dan render 3D. Contoh nyata: `GoldCoast/This_image_is_already_correct_*.jpeg`
+adalah render (mobil sport tertata, patung bersuluh, taman tanpa cacat),
+sementara `GoldCoast/Recreate_this_photograph_*.jpeg` foto asli bangunan yang
+sama saat masih ada scaffolding.
+
+Render **tidak boleh** tampil seolah-olah hasil jadi. Portofolio ini dipakai
+menjual proyek ratusan juta; customer yang datang ke lokasi dan melihat
+bangunan aslinya berbeda dari gambar akan merasa dibohongi.
+
+Penanganannya: dua bagian terpisah dengan halaman pembatas sendiri —
+**Karya Terbangun** (hanya foto nyata) dan **Visualisasi Desain** (render).
+Ini justru memperkuat tagline Design · Build · Elevate.
+
+Tiap foto di `content.mjs` wajib punya field `jenis`:
+- `foto` — hasil jadi, boleh full-bleed dan boleh jadi sampul
+- `proses` — konstruksi berjalan, dipakai kecil sebagai bukti pengerjaan
+- `render` — visualisasi, hanya boleh di bagian Visualisasi Desain
+
+### Halaman proyek adaptif
+
+Pola halaman ditentukan jumlah foto layak cetak yang benar-benar ada:
+
+| Foto layak | Pola |
+|---|---|
+| ≥ 4 | 2 halaman — kiri full-bleed, kanan data + 3 foto kecil |
+| 2–3 | 1 halaman — foto besar di atas, data di bawah |
+| 1 | 1 halaman — foto setengah halaman, data di sampingnya |
+| 0 | 1 halaman penanda dengan slot foto yang jelas |
+
+Begitu foto baru masuk, pola naik sendiri tanpa mengubah kode.
+
+### Halaman "Proyek lain"
+
+Daftar teks murni: nama proyek, lokasi, tahun, lingkup. Disusun seperti indeks
+buku. Tidak memuat foto sama sekali — foto proyek-proyek ini kualitasnya tidak
+layak portofolio. Tujuannya menunjukkan jam terbang, bukan memamerkan hasil.
 
 ### Halaman 17 — Proyek lain
 
@@ -52,17 +91,27 @@ layak portofolio. Tujuannya menunjukkan jam terbang, bukan memamerkan hasil.
 
 ## 5 proyek andalan
 
-| # | Proyek | Foto | Data |
+Hasil audit `photos-src/` dan `photos-archive/` (2026-08-03). Semua gambar di
+bawah 1400 px sisi terpendek dibuang — isinya thumbnail 200–400 px.
+
+| # | Proyek | Gambar layak cetak | Data |
 |---|---|---|---|
-| 1 | Gold Coast PIK | ada di repo | ada di `portfolio.tsx` |
-| 2 | Puri Garden Casco | **belum ada** | **belum ada** |
-| 3 | Citra 1 Ext | **belum ada** | **belum ada** |
-| 4 | Bangka Mampang, Jaksel | ada di repo | ada di `portfolio.tsx` |
-| 5 | Bozz Billiard | ada di repo | ada di `portfolio.tsx` |
+| 1 | Gold Coast PIK | 2 (1 foto proses, 1 render) | ada di `portfolio.tsx` |
+| 2 | Puri Garden Casco | **0 — belum ada** | **belum ada** |
+| 3 | Citra 1 Ext | **0 — belum ada** | **belum ada** |
+| 4 | Bangka Mampang, Jaksel | 5 | ada di `portfolio.tsx` |
+| 5 | Bozz Billiard | 2 | ada di `portfolio.tsx` |
+
+Total sekitar 9 gambar layak cetak untuk kebutuhan ideal 20. Karena itu pola
+halaman dibuat adaptif, bukan dipaksa 2 halaman per proyek.
 
 Proyek 2 dan 3 belum pernah masuk repo. Nama mirip dengan proyek yang ada
 ("Puri Metland", "Citra 2 Ext") tapi user memastikan ini proyek berbeda.
 Sampai fotonya dikirim, kedua halaman ini memakai penanda visual yang jelas.
+
+`photos-src/Proyek Baru/` berisi 8 foto WhatsApp 1200×1600 — di bawah ambang
+layak cetak untuk full-bleed, tapi cukup untuk ukuran setengah halaman.
+Perlu dicek apakah ini salah satu dari dua proyek yang belum ada datanya.
 
 ## Sistem visual
 
@@ -89,11 +138,26 @@ kalau dijilid. Kolom tunggal untuk teks, dua kolom untuk data proyek.
 
 ```
 portfolio/
-  content.ts      semua teks & data proyek — satu file, user bisa edit sendiri
-  template/       layout HTML + CSS cetak
+  content.mjs     semua teks & data proyek — satu file, user bisa edit sendiri
+  pages/          satu modul per jenis halaman
+  lib/            audit foto, validasi penanda, helper HTML
   photos/         foto terpilih, nama file eksplisit (goldcoast-01.jpg)
+  styles.css      CSS cetak
   build.mjs       node portfolio/build.mjs → Arsana-Company-Profile.pdf
 ```
+
+JavaScript polos (`.mjs`), bukan TypeScript — mengikuti `scripts/og-image.mjs`
+yang sudah ada, dan supaya user bisa mengedit `content.mjs` tanpa tooling.
+
+Alat yang sudah tersedia di repo, tidak perlu dependensi baru:
+- **playwright** (devDependency, browser sudah terpasang) — render HTML ke PDF
+- **sharp** (dependency) — baca dimensi gambar dan kompres foto saat build
+- **node:test** — bawaan Node 24, tidak perlu framework tes tambahan
+
+Terverifikasi lewat percobaan langsung: Chrome menghasilkan A4 presisi
+209,9 × 297,0 mm, font Baskerville dan Avenir Next ter-embed ke dalam PDF, dan
+warna latar ikut tercetak selama `print-color-adjust: exact` dipasang.
+Halaman kosong di akhir dicegah dengan `.page:last-child { break-after: auto }`.
 
 Aturan yang harus dipegang:
 
@@ -126,7 +190,9 @@ Pekerjaan dimulai tanpa menunggu data ini; semua diisi penanda.
 
 | Risiko | Penanganan |
 |---|---|
-| Foto repo resolusinya kurang untuk cetak A4 | Cek resolusi tiap foto sebelum dipakai; yang kurang dipakai ukuran kecil saja, jangan full-bleed |
-| Font serif yang cocok tidak tersedia | Cek ketersediaan di awal implementasi; siapkan pilihan cadangan |
+| Render tersaji seolah hasil jadi | Field `jenis` wajib di tiap foto; render hanya boleh muncul di bagian Visualisasi Desain, dijaga oleh validator saat build |
+| Stok foto layak cetak cuma 9 dari 20 yang ideal | Pola halaman adaptif; dokumen tetap rapi walau tipis, tumbuh sendiri saat foto baru masuk |
+| Foto repo resolusinya kurang untuk cetak A4 | Ambang: sisi terpendek ≥ 1400 px baru boleh full-bleed. Sudah diaudit |
+| Font serif yang cocok tidak tersedia | Sudah dicek tersedia: Baskerville.ttc dan Avenir Next.ttc ada di sistem |
 | Ukuran PDF terlalu besar untuk WhatsApp (batas 100 MB, wajar di bawah 10 MB) | Kompres foto saat build, target akhir di bawah 8 MB |
 | Dokumen terkirim dengan penanda masih terisi | Build gagal dengan pesan jelas kalau ada penanda tersisa, kecuali dijalankan dengan flag draft |
