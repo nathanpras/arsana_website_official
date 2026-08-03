@@ -52,5 +52,37 @@
       ]
     }
   },
-  "notes": "Vector traced from the original logo artwork. Text is outlined, not live type. Colours sampled from the source: gold #AF8431, ink #241812, cream #F6F3EE."
+  "notes": "Vector traced from the original logo artwork. Text is outlined, not live type. Colours sampled from the source: gold #AF8431, ink #241812, cream #F6F3EE.",
+  "canvases": {
+    "story-1080x1920": {
+      "size": "1080x1920",
+      "lockup": "portrait",
+      "files": [
+        "arsana-story-1080x1920.svg",
+        "arsana-story-1080x1920.png",
+        "arsana-story-1080x1920-dark.svg",
+        "arsana-story-1080x1920-dark.png"
+      ]
+    },
+    "square-1080x1080": {
+      "size": "1080x1080",
+      "lockup": "portrait",
+      "files": [
+        "arsana-square-1080x1080.svg",
+        "arsana-square-1080x1080.png",
+        "arsana-square-1080x1080-dark.svg",
+        "arsana-square-1080x1080-dark.png"
+      ]
+    },
+    "og-1200x630": {
+      "size": "1200x630",
+      "lockup": "landscape",
+      "files": [
+        "arsana-og-1200x630.svg",
+        "arsana-og-1200x630.png",
+        "arsana-og-1200x630-dark.svg",
+        "arsana-og-1200x630-dark.png"
+      ]
+    }
+  }
 }

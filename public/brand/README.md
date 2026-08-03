@@ -31,6 +31,19 @@ Nilai yang sama tersedia mesin-baca di [`brand.json`](./brand.json).
 PNG transparan ikut disertakan untuk platform yang tidak menerima SVG
 (monogram 512 & 1024 px, lockup lain 1600–2400 px sisi panjang).
 
+## Kanvas siap pakai
+
+Logo sudah ditempatkan di kanvas dengan background, tinggal upload:
+
+| File | Ukuran | Buat |
+|---|---|---|
+| `arsana-story-1080x1920` | 9:16 | story Instagram / TikTok / WA |
+| `arsana-square-1080x1080` | 1:1 | post feed Instagram |
+| `arsana-og-1200x630` | 1.91:1 | preview link (Open Graph / share) |
+
+Masing-masing ada versi cream (default) dan `-dark` (background ink `#241812`,
+tagline cream). Tersedia SVG dan PNG ukuran asli.
+
 ## Catatan
 
 - Teks sudah jadi outline, bukan font hidup — tidak bisa diedit sebagai teks.
